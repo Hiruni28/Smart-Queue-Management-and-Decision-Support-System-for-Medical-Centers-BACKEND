@@ -33,7 +33,7 @@ public class DoctorController {
 
     @GetMapping
 
-    public List<Doctor> all(){
+    public List<Doctor> getAll(){
 
         return service.getAll();
 
