@@ -15,15 +15,15 @@ public class AppointmentService {
 
     public AppointmentService(
             AppointmentRepository repo
-    ){
+    ) {
 
-        this.repo=repo;
+        this.repo = repo;
 
     }
 
     public Appointment book(
             Appointment appointment
-    ){
+    ) {
 
         appointment.setStatus(
                 "Booked"
@@ -37,7 +37,7 @@ public class AppointmentService {
 
     public List<Appointment> patientAppointments(
             Long patientId
-    ){
+    ) {
 
         return repo.findByPatientId(
                 patientId
@@ -45,9 +45,48 @@ public class AppointmentService {
 
     }
 
+    public Appointment updateAppointment(
+
+            Long id,
+
+            Appointment updated
+
+    ) {
+
+        Appointment existing =
+                repo.findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new RuntimeException(
+                                                "Appointment not found"
+                                        )
+                        );
+
+        existing.setDoctorId(
+                updated.getDoctorId()
+        );
+
+        existing.setAppointmentDate(
+                updated.getAppointmentDate()
+        );
+
+        existing.setAppointmentTime(
+                updated.getAppointmentTime()
+        );
+
+        existing.setStatus(
+                "Booked"
+        );
+
+        return repo.save(
+                existing
+        );
+
+    }
+
     public void cancel(
             Long id
-    ){
+    ) {
 
         repo.deleteById(
                 id
@@ -56,3 +95,4 @@ public class AppointmentService {
     }
 
 }
+
