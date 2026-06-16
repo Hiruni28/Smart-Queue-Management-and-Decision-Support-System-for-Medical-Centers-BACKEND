@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.hospital.queue_management_system.dto.LoginRequest;
 import com.hospital.queue_management_system.model.Staff;
 import com.hospital.queue_management_system.service.StaffService;
 
@@ -22,54 +23,54 @@ public class StaffController {
     public StaffController(
             StaffService service
     ){
-
         this.service=service;
-
     }
 
     @GetMapping
-
     public List<Staff> getAll(){
-
         return service.getAll();
-
     }
 
     @PostMapping
-
     public Staff save(
-            @RequestBody
-            Staff staff
+            @RequestBody Staff staff
     ){
-
-        return service.save(
-                staff
-        );
-
+        return service.save(staff);
     }
 
     @PutMapping
-
     public Staff update(
-            @RequestBody
-            Staff staff
+            @RequestBody Staff staff
     ){
-
-        return service.save(
-                staff
-        );
-
+        return service.save(staff);
     }
 
     @DeleteMapping("/{id}")
-
     public void delete(
             @PathVariable Long id
     ){
+        service.delete(id);
+    }
 
-        service.delete(
-                id
-        );
+    @PostMapping("/login")
+
+    public String login(
+
+            @RequestBody
+            LoginRequest request
+
+    ){
+
+        boolean ok=
+                service.login(
+                        request
+                );
+
+        return ok
+                ?
+                "Login Success"
+                :
+                "Invalid Credentials";
 
     }
 
