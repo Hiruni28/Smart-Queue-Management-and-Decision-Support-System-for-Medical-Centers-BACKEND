@@ -12,7 +12,7 @@ import com.hospital.queue_management_system.service.AppointmentService;
 @RequestMapping("/appointment")
 
 @CrossOrigin(
-        origins="http://localhost:5173"
+        origins = "http://localhost:5173"
 )
 
 public class AppointmentController {
@@ -21,9 +21,9 @@ public class AppointmentController {
 
     public AppointmentController(
             AppointmentService service
-    ){
+    ) {
 
-        this.service=service;
+        this.service = service;
 
     }
 
@@ -33,7 +33,7 @@ public class AppointmentController {
 
             @RequestBody Appointment appointment
 
-    ){
+    ) {
 
         return service.book(
                 appointment
@@ -48,10 +48,29 @@ public class AppointmentController {
             @PathVariable
             Long patientId
 
-    ){
+    ) {
 
         return service.patientAppointments(
                 patientId
+        );
+
+    }
+
+    @PutMapping("/{id}")
+
+    public Appointment update(
+
+            @PathVariable
+            Long id,
+
+            @RequestBody
+            Appointment appointment
+
+    ) {
+
+        return service.updateAppointment(
+                id,
+                appointment
         );
 
     }
@@ -63,7 +82,7 @@ public class AppointmentController {
             @PathVariable
             Long id
 
-    ){
+    ) {
 
         service.cancel(
                 id
