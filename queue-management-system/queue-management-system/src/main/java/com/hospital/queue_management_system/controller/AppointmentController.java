@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.hospital.queue_management_system.dto.AppointmentViewDTO;
 import com.hospital.queue_management_system.model.Appointment;
 import com.hospital.queue_management_system.service.AppointmentService;
 
@@ -12,7 +13,7 @@ import com.hospital.queue_management_system.service.AppointmentService;
 @RequestMapping("/appointment")
 
 @CrossOrigin(
-        origins = "http://localhost:5173"
+        origins="http://localhost:5173"
 )
 
 public class AppointmentController {
@@ -21,19 +22,17 @@ public class AppointmentController {
 
     public AppointmentController(
             AppointmentService service
-    ) {
+    ){
 
-        this.service = service;
+        this.service=service;
 
     }
 
     @PostMapping
 
     public Appointment book(
-
             @RequestBody Appointment appointment
-
-    ) {
+    ){
 
         return service.book(
                 appointment
@@ -44,11 +43,8 @@ public class AppointmentController {
     @GetMapping("/{patientId}")
 
     public List<Appointment> get(
-
-            @PathVariable
-            Long patientId
-
-    ) {
+            @PathVariable Long patientId
+    ){
 
         return service.patientAppointments(
                 patientId
@@ -59,14 +55,9 @@ public class AppointmentController {
     @PutMapping("/{id}")
 
     public Appointment update(
-
-            @PathVariable
-            Long id,
-
-            @RequestBody
-            Appointment appointment
-
-    ) {
+            @PathVariable Long id,
+            @RequestBody Appointment appointment
+    ){
 
         return service.updateAppointment(
                 id,
@@ -78,14 +69,36 @@ public class AppointmentController {
     @DeleteMapping("/{id}")
 
     public void cancel(
+            @PathVariable Long id
+    ){
 
-            @PathVariable
-            Long id
+        service.cancel(id);
 
-    ) {
+    }
 
-        service.cancel(
-                id
+    @GetMapping("/staff/today/{doctorId}")
+
+    public List<AppointmentViewDTO>
+    today(
+            @PathVariable Long doctorId
+    ){
+
+        return service.todayAppointments(
+                doctorId
+        );
+
+    }
+
+    @PutMapping("/status/{id}")
+
+    public void updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status
+    ){
+
+        service.updateStatus(
+                id,
+                status
         );
 
     }
