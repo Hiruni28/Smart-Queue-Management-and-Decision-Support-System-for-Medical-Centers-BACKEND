@@ -1,5 +1,6 @@
 package com.hospital.queue_management_system.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,11 @@ public interface AppointmentRepository
 
     List<Appointment> findByPatientId(
             Long patientId
+    );
+
+    List<Appointment> findByAppointmentDateAndDoctorId(
+            Date date,
+            Long doctorId
     );
 
 }
