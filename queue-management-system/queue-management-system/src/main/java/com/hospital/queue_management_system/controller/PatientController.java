@@ -1,6 +1,7 @@
 package com.hospital.queue_management_system.controller;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,23 @@ public class PatientController {
 
     public String register(
 
-            @RequestBody Patient patient
+            @RequestBody
+            Patient patient
+
+    ){
+
+        return service.register(
+                patient
+        );
+
+    }
+
+    @PostMapping("/walkin")
+
+    public String walkin(
+
+            @RequestBody
+            Patient patient
 
     ){
 
@@ -53,7 +70,8 @@ public class PatientController {
 
     public String login(
 
-            @RequestBody Map<String,String> body
+            @RequestBody
+            Map<String,String> body
 
     ){
 
@@ -86,7 +104,6 @@ public class PatientController {
 
     }
 
-
     @PutMapping("/profile")
 
     public Patient update(
@@ -98,6 +115,21 @@ public class PatientController {
 
         return service.updateProfile(
                 patient
+        );
+
+    }
+
+    @GetMapping("/search")
+
+    public List<Patient> search(
+
+            @RequestParam
+            String keyword
+
+    ){
+
+        return service.search(
+                keyword
         );
 
     }
