@@ -33,9 +33,11 @@ public class PatientService {
     ){
 
         if(
-                repo.findByEmail(
-                        patient.getEmail()
-                ).isPresent()
+                patient.getEmail()!=null
+                        &&
+                        repo.findByEmail(
+                                patient.getEmail()
+                        ).isPresent()
         ){
 
             return "Email already exists";
@@ -59,7 +61,6 @@ public class PatientService {
     ){
 
         Optional<Patient> patient=
-
                 repo.findByEmail(
                         email
                 );
@@ -69,9 +70,7 @@ public class PatientService {
                         &&
                         patient.get()
                                 .getPassword()
-                                .equals(
-                                        password
-                                )
+                                .equals(password)
         ){
 
             return "Login Success";
@@ -98,6 +97,44 @@ public class PatientService {
 
         return repo.save(
                 patient
+        );
+
+    }
+
+    public List<Patient> search(
+            String keyword
+    ){
+
+        try{
+
+            Long id=
+                    Long.parseLong(
+                            keyword
+                    );
+
+            return repo.findById(id)
+                    .map(List::of)
+                    .orElse(List.of());
+
+        }
+
+        catch(Exception ignored){}
+
+        List<Patient> byName=
+                repo.findByFullNameContainingIgnoreCase(
+                        keyword
+                );
+
+        if(
+                !byName.isEmpty()
+        ){
+
+            return byName;
+
+        }
+
+        return repo.findByPhoneContaining(
+                keyword
         );
 
     }
