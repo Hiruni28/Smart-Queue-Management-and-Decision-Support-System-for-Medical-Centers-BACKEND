@@ -5,10 +5,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class AppointmentViewDTO {
 
     private Long appointmentId;
+
+    private Long patientId;
+
+    private Long doctorId;
 
     private String patientName;
 
