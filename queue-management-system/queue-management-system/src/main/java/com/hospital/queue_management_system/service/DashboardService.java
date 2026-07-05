@@ -15,28 +15,45 @@ public class DashboardService {
 
     private final AppointmentRepository appointmentRepo;
 
+    private final QueueTokenRepository queueRepo;
+
     public DashboardService(
 
             DoctorRepository doctorRepo,
 
             StaffRepository staffRepo,
 
-            AppointmentRepository appointmentRepo
+            AppointmentRepository appointmentRepo,
 
-    ){
+            QueueTokenRepository queueRepo
 
-        this.doctorRepo=
+    ) {
+
+        this.doctorRepo =
                 doctorRepo;
 
-        this.staffRepo=
+        this.staffRepo =
                 staffRepo;
 
-        this.appointmentRepo=
+        this.appointmentRepo =
                 appointmentRepo;
+
+        this.queueRepo =
+                queueRepo;
 
     }
 
-    public DashboardStatsDTO getStats(){
+    public DashboardStatsDTO getStats() {
+
+        Long waitingPatients =
+                queueRepo.countByQueueStatus(
+                        "Waiting"
+                );
+
+        Long servingPatients =
+                queueRepo.countByQueueStatus(
+                        "Serving"
+                );
 
         return new DashboardStatsDTO(
 
@@ -44,7 +61,11 @@ public class DashboardService {
 
                 staffRepo.count(),
 
-                appointmentRepo.count()
+                appointmentRepo.count(),
+
+                waitingPatients,
+
+                servingPatients
 
         );
 
