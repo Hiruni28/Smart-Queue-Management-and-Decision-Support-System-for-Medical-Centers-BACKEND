@@ -1,18 +1,23 @@
 package com.hospital.queue_management_system.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-
 @AllArgsConstructor
 
 public class DashboardStatsDTO {
 
-    private long doctors;
+    private Long doctors;
 
-    private long staff;
+    private Long staff;
 
-    private long appointments;
+    private Long appointments;
+
+    private Long waitingPatients;
+
+    private Long servingPatients;
 
 }
