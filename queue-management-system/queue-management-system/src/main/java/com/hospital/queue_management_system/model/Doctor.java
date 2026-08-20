@@ -4,33 +4,27 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "Doctors")
-
+@Table(name = "doctors")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Doctor {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "doctor_id")
     private Long doctorId;
 
     @Column(name = "doctor_name")
     private String doctorName;
 
+    @Column(name = "specialization")
     private String specialization;
 
+    @Column(name = "availability")
     private String availability;
 
     @Column(name = "room_number")
     private String roomNumber;
-
-    @Column(name = "max_patients_per_day")
-    private Integer maxPatientsPerDay;
-
 }
