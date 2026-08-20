@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class DoctorScheduleDTO {
 
     private Long scheduleId;
@@ -22,4 +21,5 @@ public class DoctorScheduleDTO {
 
     private String endTime;
 
+    private Integer maxPatients;
 }

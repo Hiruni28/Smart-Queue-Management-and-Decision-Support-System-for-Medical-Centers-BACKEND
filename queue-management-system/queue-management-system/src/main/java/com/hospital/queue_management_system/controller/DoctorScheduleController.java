@@ -9,11 +9,7 @@ import com.hospital.queue_management_system.service.DoctorScheduleService;
 
 @RestController
 @RequestMapping("/schedule")
-
-@CrossOrigin(
-        origins = "http://localhost:5173"
-)
-
+@CrossOrigin(origins = "http://localhost:5173")
 public class DoctorScheduleController {
 
     private final DoctorScheduleService service;
@@ -28,61 +24,43 @@ public class DoctorScheduleController {
     public List<DoctorSchedule> getAll() {
 
         return service.getAll();
+    }
 
+    @GetMapping("/today")
+    public List<DoctorSchedule> todaySchedules() {
+
+        return service.getTodaySchedules();
     }
 
     @GetMapping("/{doctorId}")
     public List<DoctorSchedule> get(
-            @PathVariable
-            Long doctorId
+            @PathVariable Long doctorId
     ) {
 
-        return service.getByDoctor(
-                doctorId
-        );
-
+        return service.getByDoctor(doctorId);
     }
 
     @PostMapping
     public DoctorSchedule add(
-
-            @RequestBody
-            DoctorSchedule schedule
-
+            @RequestBody DoctorSchedule schedule
     ) {
 
-        return service.add(
-                schedule
-        );
-
+        return service.add(schedule);
     }
 
     @PutMapping
     public DoctorSchedule update(
-
-            @RequestBody
-            DoctorSchedule schedule
-
+            @RequestBody DoctorSchedule schedule
     ) {
 
-        return service.update(
-                schedule
-        );
-
+        return service.update(schedule);
     }
 
     @DeleteMapping("/{id}")
     public void delete(
-
-            @PathVariable
-            Long id
-
+            @PathVariable Long id
     ) {
 
-        service.delete(
-                id
-        );
-
+        service.delete(id);
     }
-
 }
