@@ -12,5 +12,4 @@ public class EmergencyTransferDTO {
     private Long newDoctorId;
 
     private String reason;
-
 }
