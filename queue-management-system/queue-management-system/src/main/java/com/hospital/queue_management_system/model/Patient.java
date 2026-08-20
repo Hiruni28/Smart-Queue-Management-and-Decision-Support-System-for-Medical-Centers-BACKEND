@@ -10,35 +10,37 @@ import java.sql.Date;
 @Setter
 @Getter
 @Entity
-
-@Table(name="patients")
-
+@Table(name = "patients")
 public class Patient {
 
     @Id
-
-    @GeneratedValue(
-            strategy=GenerationType.IDENTITY
-    )
-
-    @Column(name="patient_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "patient_id")
     private Long patientId;
 
-    @Column(name="full_name")
+    @Column(name = "full_name")
     private String fullName;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String email;
 
     private String password;
 
     private String phone;
 
-    @Column(name="date_of_birth")
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
-    @Column(name="created_at")
+    // ==========================================
+    // SPECIAL NEEDS INFORMATION
+    // ==========================================
+
+    @Column(name = "special_needs", nullable = false)
+    private Boolean specialNeeds = false;
+
+    @Column(name = "disability_type")
+    private String disabilityType;
+
+    @Column(name = "created_at")
     private Timestamp createdAt;
-
-
 }
