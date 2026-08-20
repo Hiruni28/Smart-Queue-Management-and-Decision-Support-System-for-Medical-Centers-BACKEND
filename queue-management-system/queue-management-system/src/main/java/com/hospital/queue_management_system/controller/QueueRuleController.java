@@ -23,10 +23,13 @@ public class QueueRuleController {
         return service.getAll();
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public QueueRule update(
+            @PathVariable Long id,
             @RequestBody QueueRule rule
     ) {
+        rule.setRuleId(id);
+
         return service.save(rule);
     }
 }
