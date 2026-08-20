@@ -16,11 +16,30 @@ public interface AppointmentRepository
     );
 
     List<Appointment> findByAppointmentDateAndDoctorId(
-            Date date,
+            Date appointmentDate,
+            Long doctorId
+    );
+
+    // Emergency patients first
+    List<Appointment> findByAppointmentDateAndDoctorIdOrderByEmergencyLevelDescAppointmentTimeAscAppointmentIdAsc(
+            Date appointmentDate,
             Long doctorId
     );
 
     List<Appointment> findAllByOrderByAppointmentDateDesc();
+
+    boolean existsByPatientIdAndDoctorIdAndAppointmentDate(
+            Long patientId,
+            Long doctorId,
+            Date appointmentDate
+    );
+
+    boolean existsByPatientIdAndDoctorIdAndAppointmentDateAndAppointmentIdNot(
+            Long patientId,
+            Long doctorId,
+            Date appointmentDate,
+            Long appointmentId
+    );
 
     boolean existsByPatientIdAndDoctorIdAndAppointmentDateAndAppointmentTime(
             Long patientId,
@@ -29,8 +48,24 @@ public interface AppointmentRepository
             Time appointmentTime
     );
 
-    long countByDoctorIdAndAppointmentDate(
+    boolean existsByPatientIdAndDoctorIdAndAppointmentDateAndAppointmentTimeAndAppointmentIdNot(
+            Long patientId,
             Long doctorId,
-            Date appointmentDate
+            Date appointmentDate,
+            Time appointmentTime,
+            Long appointmentId
+    );
+
+    long countByDoctorIdAndAppointmentDateAndStatusNot(
+            Long doctorId,
+            Date appointmentDate,
+            String status
+    );
+
+    long countByDoctorIdAndAppointmentDateAndStatusNotAndAppointmentIdNot(
+            Long doctorId,
+            Date appointmentDate,
+            String status,
+            Long appointmentId
     );
 }

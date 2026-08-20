@@ -19,4 +19,5 @@ public class StaffAppointmentDTO {
 
     private String status;
 
+    private Integer emergencyLevel;
 }

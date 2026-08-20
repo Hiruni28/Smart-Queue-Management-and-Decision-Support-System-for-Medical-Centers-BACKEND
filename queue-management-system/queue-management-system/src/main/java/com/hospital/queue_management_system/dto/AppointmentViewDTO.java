@@ -27,4 +27,19 @@ public class AppointmentViewDTO {
 
     private String status;
 
+    private String queueToken;
+
+    private Integer estimatedWaitTime;
+
+    private Integer age;
+
+    private Boolean hasSpecialNeeds;
+
+    private String calculatedPriority;
+
+    // =========================================================
+    // EMERGENCY LEVEL
+    // =========================================================
+
+    private Integer emergencyLevel;
 }
